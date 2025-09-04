@@ -245,32 +245,37 @@ body {
     background-clip: text;
 }
 
-/* Header Styles */
+/* Navbar Styles */
 header {
+    width: 100%;
     backdrop-filter: blur(12px);
-    background: white;
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(0, 0, 0, 0.7);
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }
 
 .nav-link {
-    color: rgba(255, 255, 255, 0.9);
+    color: white;
     text-decoration: none;
-    font-size: 0.875rem;
-    font-family: Georgia, serif;
+    font-family: serif;
     position: relative;
+    padding: 0.5rem 0;
     transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: white;
+    color: #a5b4fc;
 }
 
 .nav-underline {
     position: absolute;
-    bottom: -4px;
+    bottom: 0;
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(to right, #60a5fa, #a855f7);
+    background-color: #a5b4fc;
     transition: width 0.3s ease;
 }
 
@@ -278,6 +283,13 @@ header {
     width: 100%;
 }
 
+.bg-gradient-text {
+    background: linear-gradient(90deg, #a5b4fc, #818cf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
 /* Spline Viewer */
 .spline-container {
     height: 500px;
@@ -452,6 +464,7 @@ header {
     font-family: Georgia, serif;
     color: white;
     margin-bottom: 0.5rem;
+    margin-top: 2.5rem;
 }
 
 .inquiry-subtitle {
