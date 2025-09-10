@@ -3,7 +3,7 @@ import { useState } from "react";
 import Script from "next/script";
 
 const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwB0rRsHLfgg0dpOd393nlCgvdIdH5xfE8YyYZYCPqQsf5MCeRK-8PaJIPodU5WPobm/exec";
+  "https://script.google.com/macros/s/AKfycby2bnoZrGQmcbfnREPt6uMrvCpCjAFLk2dcw-Vp76aJkaNGLnlQUy03fIEoPbgW1LB3/exec";
 
 export default function Skylink() {
   const [formData, setFormData] = useState({
