@@ -1,6 +1,5 @@
 "use client"
-import { useState } from "react";
-import Script from "next/script";
+import { useState, useEffect } from "react";
 
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycby2bnoZrGQmcbfnREPt6uMrvCpCjAFLk2dcw-Vp76aJkaNGLnlQUy03fIEoPbgW1LB3/exec";
@@ -15,6 +14,27 @@ export default function Skylink() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+  setIsMobileMenuOpen(!isMobileMenuOpen);
+};
+const closeMobileMenu = () => {
+  setIsMobileMenuOpen(false);
+};
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 100,
+        y: (e.clientY / window.innerHeight) * 100,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -44,58 +64,225 @@ export default function Skylink() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-black to-purple-900">
+      {/* Header */}
+     <header className="max-w-7xl mx-auto backdrop-blur-sm sticky top-0 z-50">
+  <div className="container mx-auto px-6">
+    <div className="flex justify-between items-center py-4">
+      <a href="/" className="text-3xl font-serif bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+        SKYLINK
+      </a>
       
-      <header className="max-w-7xl mx-auto bg-black backdrop-blur-md  sticky top-0 z-50">
-        <div className="container mx-auto px-6 ">
-          <div className="flex justify-between items-center py-4">
-            <a href="/" className="text-2xl font-serif bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              SKYLINK
-            </a>
-            <nav className="hidden md:flex space-x-8">
-              <a href="#" className="text-white/90 text-sm font-serif hover:text-white transition-colors duration-300 relative group">
-                Home
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+      {/* Desktop Navigation */}
+      <nav className="hidden md:flex space-x-8">
+        <a href="#" className="text-white/90 text-sm font-serif hover:text-white transition-colors duration-300 relative group">
+          Home
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#proper" className="text-white/90 text-sm font-serif hover:text-white transition-colors duration-300 relative group">
+          Property
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#inqu" className="text-white/90 font-serif hover:text-white transition-colors duration-300 relative group">
+          Inquiry
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+        </a>
+      </nav>
+      
+      {/* Mobile Menu Button */}
+      <div className="md:hidden">
+        <button 
+          onClick={toggleMobileMenu}
+          className="text-white p-2 relative z-50 transition-transform duration-300"
+          title="Toggle Menu"
+        >
+          {/* Animated Hamburger Icon */}
+          <div className="w-6 h-6 relative">
+            <span 
+              className={`absolute block w-6 h-0.5 bg-white transition-all duration-300 ${
+                isMobileMenuOpen ? 'rotate-45 top-3' : 'top-1'
+              }`}
+            />
+            <span 
+              className={`absolute block w-6 h-0.5 bg-white transition-all duration-300 top-3 ${
+                isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+            <span 
+              className={`absolute block w-6 h-0.5 bg-white transition-all duration-300 ${
+                isMobileMenuOpen ? '-rotate-45 top-3' : 'top-5'
+              }`}
+            />
+          </div>
+        </button>
+      </div>
+    </div>
+
+    {/* Mobile Navigation Menu */}
+    <div 
+      className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+        isMobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+      }`}
+    >
+      <nav className="bg-gradient-to-br from-slate-900 via-black to-purple-900 backdrop-blur-lg border-t border-white/10 py-4">
+        <div className="flex flex-col space-y-4">
+          <a 
+            href="#" 
+            onClick={closeMobileMenu}
+            className="text-white/90 font-serif hover:text-white transition-colors duration-300 px-4 py-2 hover:bg-white/5 rounded-lg relative group"
+          >
+            Home
+            <span className="absolute bottom-0 left-4 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-12 transition-all duration-300"></span>
+          </a>
+          <a 
+            href="#proper" 
+            onClick={closeMobileMenu}
+            className="text-white/90 font-serif hover:text-white transition-colors duration-300 px-4 py-2 hover:bg-white/5 rounded-lg relative group"
+          >
+            Property
+            <span className="absolute bottom-0 left-4 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-16 transition-all duration-300"></span>
+          </a>
+          <a 
+            href="#inqu" 
+            onClick={closeMobileMenu}
+            className="text-white/90 font-serif hover:text-white transition-colors duration-300 px-4 py-2 hover:bg-white/5 rounded-lg relative group"
+          >
+            Inquiry
+            <span className="absolute bottom-0 left-4 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-14 transition-all duration-300"></span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+      {/* Enhanced Custom Hero Section */}
+      <section className="sticky w-full h-[750px] overflow-hidden bg-gradient-to-br from-slate-900 via-black to-purple-900">
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          {/* Primary animated gradient orb */}
+          <div 
+            className="absolute w-96 h-96 bg-gradient-to-r from-purple-800/30 to-blue-800/30 rounded-full blur-3xl animate-pulse"
+            style={{
+              left: `${20 + mousePosition.x * 0.02}%`,
+              top: `${30 + mousePosition.y * 0.02}%`,
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+          
+          {/* Secondary animated gradient orb */}
+          <div 
+            className="absolute w-80 h-80 bg-gradient-to-r from-blue-700/25 to-purple-700/25 rounded-full blur-2xl animate-bounce"
+            style={{
+              right: `${15 + mousePosition.x * -0.015}%`,
+              bottom: `${20 + mousePosition.y * -0.015}%`,
+              animationDuration: '3s'
+            }}
+          />
+
+          {/* Flowing wave animation */}
+          <div className="absolute bottom-0 left-0 w-full">
+            <svg 
+              className="relative block w-full h-40"
+              viewBox="0 0 1200 120" 
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#3B82F6" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.3" />
+                </linearGradient>
+              </defs>
+              <path 
+                d="M0,60 C150,100 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z" 
+                fill="url(#waveGradient)"
+                className="animate-pulse"
+                style={{ animationDuration: '4s' }}
+              />
+              <path 
+                d="M0,80 C300,120 600,40 900,80 C1050,100 1150,60 1200,80 L1200,120 L0,120 Z" 
+                fill="url(#waveGradient)"
+                opacity="0.5"
+                className="animate-pulse"
+                style={{ animationDuration: '6s', animationDelay: '1s' }}
+              />
+            </svg>
+          </div>
+
+          {/* Floating particles */}
+          <div className="absolute inset-0">
+            {[...Array(15)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-white/20 rounded-full animate-ping"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  animationDuration: `${2 + Math.random() * 3}s`
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 flex items-center justify-center h-full px-6">
+          <div className="text-center max-w-4xl mx-auto">
+            {/* Main Heading */}
+            <div className="mb-8">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white/90 mb-4 leading-tight">
+                Skylink Capsule Homes
+              </h1>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-3xl md:text-5xl lg:text-6xl font-light">
+                <span className="text-blue-300 font-serif">Compact</span>
+                <span className="text-white/80 font-serif">Smart</span>
+                <span className="bg-gradient-to-r from-purple-600 to-pink-700 font-serif bg-clip-text text-transparent">
+                & Stylish.
+                </span>
+              </div>
+            </div>
+
+            {/* Subtitle */}
+            <p className="text-lg md:text-xl font-sans text-white/70 font-light mb-12 max-w-2xl mx-auto leading-relaxed">
+              Premium ready-to-use capsule homes designed for comfort, style, and sustainability.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="#proper"
+                className="group relative px-8 py-4 bg-gradient-to-r from-blue-700 to-purple-800 rounded-full text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25"
+              >
+                <span className="relative z-10">Explore Properties</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </a>
-              <a href="#proper" className="text-white/90 text-sm font-serif hover:text-white transition-colors duration-300 relative group">
-                Property
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+              
+              <a 
+                href="#inqu"
+                className="group px-8 py-4 border-2 border-white/30 rounded-full text-white font-semibold hover:border-white/60 hover:bg-white/5 transition-all duration-300 backdrop-blur-sm"
+              >
+                <span className="group-hover:text-blue-300 transition-colors duration-300">Get In Touch</span>
               </a>
-              <a href="#inqu" className="text-white/90  font-serif hover:text-white transition-colors duration-300 relative group">
-                Inquiry
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
-              </a>
-            </nav>
-            
-            <div className="md:hidden">
-              <button className="text-white p-2">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+              <div className="animate-bounce">
+                <svg className="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
-              </button>
+              </div>
             </div>
           </div>
         </div>
-      </header>
 
-      {/* Enhanced 3D Spline Viewer */}
-      <section className="relative w-full h-[500px] md:h-[700px] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent z-10"></div>
-        <Script 
-          src="https://unpkg.com/@splinetool/viewer@1.0.62/build/spline-viewer.js" 
-          strategy="beforeInteractive"
-        />
-        {/* @ts-ignore */}
-        <spline-viewer 
-          url="https://prod.spline.design/50mzmvURiJyT8t94/scene.splinecode" 
-          className="w-full h-full"
-        />
-        
-      
-        
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none"></div>
       </section>
 
-      
+      {/* Properties Section */}
       <section id="proper" className="py-16 px-6 bg-black">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
@@ -342,16 +529,11 @@ export default function Skylink() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black/50  py-8">
+      <footer className="bg-gradient-to-br from-black to-zinc-950 py-8">
         <div className="container mx-auto px-6 text-center">
-        <p className="text-sm font-serif">&copy; {new Date().getFullYear()} SkyLink. All rights reserved.</p>
+          <p className="text-sm font-serif">&copy; {new Date().getFullYear()} SkyLink. All rights reserved.</p>
         </div>
       </footer>
-
-      <Script
-        src="https://unpkg.com/@splinetool/viewer@1.10.52/build/spline-viewer.js"
-        strategy="beforeInteractive"
-      />
     </div>
   );
 }
