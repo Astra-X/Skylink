@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const APPS_SCRIPT_URL =
@@ -69,24 +70,24 @@ const closeMobileMenu = () => {
      <header className="max-w-7xl mx-auto backdrop-blur-sm sticky top-0 z-50">
   <div className="container mx-auto px-6">
     <div className="flex justify-between items-center py-4">
-      <a href="/" className="text-3xl font-serif bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+      <Link  href="/" className="text-3xl font-serif bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
         SKYLINK
-      </a>
+      </Link>
       
       {/* Desktop Navigation */}
       <nav className="hidden md:flex space-x-8">
-        <a href="#" className="text-white/90 text-sm font-serif hover:text-white transition-colors duration-300 relative group">
+        <Link href="#" className="text-white/90 text-sm font-serif hover:text-white transition-colors duration-300 relative group">
           Home
           <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="#proper" className="text-white/90 text-sm font-serif hover:text-white transition-colors duration-300 relative group">
+        </Link>
+        <Link href="#proper" className="text-white/90 text-sm font-serif hover:text-white transition-colors duration-300 relative group">
           Property
           <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="#inqu" className="text-white/90 font-serif hover:text-white transition-colors duration-300 relative group">
+        </Link>
+        <Link href="#inqu" className="text-white/90 font-serif hover:text-white transition-colors duration-300 relative group">
           Inquiry
           <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
-        </a>
+        </Link>
       </nav>
       
       {/* Mobile Menu Button */}
@@ -126,30 +127,30 @@ const closeMobileMenu = () => {
     >
       <nav className="bg-gradient-to-br from-slate-900 via-black to-purple-900 backdrop-blur-lg border-t border-white/10 py-4">
         <div className="flex flex-col space-y-4">
-          <a 
+          <Link 
             href="#" 
             onClick={closeMobileMenu}
             className="text-white/90 font-serif hover:text-white transition-colors duration-300 px-4 py-2 hover:bg-white/5 rounded-lg relative group"
           >
             Home
             <span className="absolute bottom-0 left-4 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-12 transition-all duration-300"></span>
-          </a>
-          <a 
+          </Link>
+          <Link 
             href="#proper" 
             onClick={closeMobileMenu}
             className="text-white/90 font-serif hover:text-white transition-colors duration-300 px-4 py-2 hover:bg-white/5 rounded-lg relative group"
           >
             Property
             <span className="absolute bottom-0 left-4 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-16 transition-all duration-300"></span>
-          </a>
-          <a 
+          </Link>
+          <Link 
             href="#inqu" 
             onClick={closeMobileMenu}
             className="text-white/90 font-serif hover:text-white transition-colors duration-300 px-4 py-2 hover:bg-white/5 rounded-lg relative group"
           >
             Inquiry
             <span className="absolute bottom-0 left-4 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-14 transition-all duration-300"></span>
-          </a>
+          </Link>
         </div>
       </nav>
     </div>
@@ -251,20 +252,20 @@ const closeMobileMenu = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a 
+              <Link 
                 href="#proper"
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-700 to-purple-800 rounded-full text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25"
               >
                 <span className="relative z-10">Explore Properties</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-              </a>
+              </Link>
               
-              <a 
+              <Link 
                 href="#inqu"
                 className="group px-8 py-4 border-2 border-white/30 rounded-full text-white font-semibold hover:border-white/60 hover:bg-white/5 transition-all duration-300 backdrop-blur-sm"
               >
                 <span className="group-hover:text-blue-300 transition-colors duration-300">Get In Touch</span>
-              </a>
+              </Link>
             </div>
 
             {/* Scroll Indicator */}
@@ -384,7 +385,7 @@ const closeMobileMenu = () => {
               Get In <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Touch</span>
             </h2>
             <p className="text-md font-serif text-white/70">
-              Ready to explore your future living space? Let's connect!
+              Ready to explore your future living space? Lets connect!
             </p>
           </div>
 
